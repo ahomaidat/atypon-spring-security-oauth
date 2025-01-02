@@ -11,9 +11,9 @@ import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
-import javax.servlet.FilterChain;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.junit.After;
 import org.junit.Test;
@@ -89,16 +89,11 @@ public class OAuthConsumerContextFilterTests {
 
 			@Override
 			protected String getUserAuthorizationRedirectURL(ProtectedResourceDetails details,
-					OAuthConsumerToken requestToken, String callbackURL) {
+															 OAuthConsumerToken requestToken, String callbackURL) {
 				return callbackURL + "&" + requestToken.getResourceId();
 			}
 		};
-		filter.setRedirectStrategy(new RedirectStrategy() {
-			public void sendRedirect(HttpServletRequest request, HttpServletResponse response, String url)
-					throws IOException {
-				response.sendRedirect(url);
-			}
-		});
+
 
 		filter.setTokenServices(tokenServices);
 		filter.setConsumerSupport(support);
